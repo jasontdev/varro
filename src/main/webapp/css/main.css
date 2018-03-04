@@ -1,0 +1,18 @@
+h1, h2, h3 {
+    font-family: monospace;
+}
+
+.banner {
+    text-align: center;
+    font-size:25px;
+    height:100px;
+    width:100%;
+    display: table;
+}
+
+.main {
+    margin:auto;
+    width:800px;
+    font-size:18px;
+    font-family:sans-serif;
+}

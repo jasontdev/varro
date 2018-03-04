@@ -13,13 +13,17 @@
         </div>
         <div class="main">
             <h:form>
-                <h3>New journal entry</h3>
-                Title:<br/>
-                <h:inputText cols="80" value="#{journalInput.title}"/><br/>
-                Entry:<br/>
-                <h:inputTextarea cols="80" rows="40" value="#{journalInput.body}"/><br/>
-                <h:commandButton value="Submit" action="#{journalInput.processInput}"/>
+                <h:dataTable value="#{journalView.allJournalEntries}" var="entries">
+                    <h:column>
+                        <h4>#{entries.title}</h4>
+                        #{entries.body}<br/>
+                        <h:commandButton value="Edit"/>
+                        <h:commandButton value="Delete"/>
+                    </h:column>
+                </h:dataTable>
+                <h:commandButton value="Back" action="input.xhtml"/>
             </h:form>
         </div>
     </h:body>
 </html>
+

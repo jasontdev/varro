@@ -1,13 +1,17 @@
 package com.jmtelfer.varro;
 
 import java.io.Serializable;
-import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
+import javax.inject.Inject;
+import javax.inject.Named;
 
 @Named
 @SessionScoped
+public class JournalInput implements Serializable {
 
-public class JournalEntryInput implements Serializable {
+    @Inject
+    private Journal journal;
+
     private static final long serialVersionUID = 1L;
 
     private String title;
@@ -27,5 +31,11 @@ public class JournalEntryInput implements Serializable {
 
     public void setBody(String body) {
         this.body = body;
+    }
+
+    public String processInput() {
+        journal.addEntry(new JournalEntry(title, body));
+
+        return "entries.xhtml";
     }
 }
