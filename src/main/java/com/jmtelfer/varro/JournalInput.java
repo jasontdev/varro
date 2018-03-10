@@ -36,6 +36,6 @@ public class JournalInput implements Serializable {
     public String processInput() {
         journal.addEntry(new JournalEntry(title, body));
 
-        return "entries.xhtml";
+        return null;
     }
 }

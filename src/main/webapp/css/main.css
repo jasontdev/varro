@@ -2,17 +2,24 @@ h1, h2, h3 {
     font-family: monospace;
 }
 
-.banner {
+.login_banner {
     text-align: center;
     font-size:25px;
     height:100px;
     width:100%;
-    display: table;
+    display:table;
+    background-color:#c0ced5;
+}
+
+.journal_banner {
+    text-align: center;
+    height:100px;
+    width:100%;
+    display:table;
+    background-color:#c0ced5;
 }
 
 .main {
     margin:auto;
     width:800px;
-    font-size:18px;
-    font-family:sans-serif;
 }
