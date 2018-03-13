@@ -2,6 +2,7 @@ package com.jmtelfer.varro;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.time.LocalDate;
 
 @Entity
 @NamedQuery(
@@ -13,6 +14,13 @@ public class JournalEntry implements Serializable {
     private Long id;
 
     //Entity fields
+    @Column(name="USER_ID")
+    @Lob
+    private byte[] userId;
+
+    @Column(name="DATE")
+    private LocalDate createdOn;
+
     @Column(name="TITLE")
     private String title;
 
@@ -23,9 +31,11 @@ public class JournalEntry implements Serializable {
     public JournalEntry() {
     }
 
-    public JournalEntry(String title, String body) {
+    public JournalEntry(byte[] userId, String title, String body) {
+        this.userId = userId;
         this.title = title;
         this.body = body;
+        this.createdOn = LocalDate.now();
     }
 
     public Long getId() {

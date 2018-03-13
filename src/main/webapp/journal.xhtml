@@ -8,10 +8,10 @@
 <h:head>
 </h:head>
 <h:body>
-    <p:toolbar id="tb">
+    <p:toolbar id="tb_top">
         <f:facet name="left">
-            <p:commandButton action="PF('newEntryDialog').show()" value="New entry"
-                             icon="ui-icon-document" update="mainView"/>
+            <p:commandButton onclick="PF('newEntryDialog').show()" value="New entry"
+                             icon="ui-icon-document"/>
         </f:facet>
         <f:facet name="right">
             <p:commandButton type="button" title="Save" icon="ui-icon-disk"/>
@@ -19,16 +19,32 @@
             <p:commandButton type="button" title="Print" icon="ui-icon-print"/>
         </f:facet>
     </p:toolbar>
-    <p:sticky target="tb"/>
+    <p:sticky target="tb_top"/>
 
-    <h:form id="mainView">
-        <p:dialog header="New journal entry" widgetVar="newEntryDialog">
-            <p:panelGrid cols="1">
-                <p:inputText/>
-                <p:inputTextarea cols="50" rows="20"/>
-            </p:panelGrid>
-        </p:dialog>
-    </h:form>
+    <p:dialog header="Add new journal entry" widgetVar="newEntryDialog" modal="true">
+        <h:form>
+            <h:panelGrid columns="1">
+                <p:inputText value="#{journalInput.title}"/>
+                <p:inputTextarea value="#{journalInput.body}" cols="60" rows="20"/>
+                <p:commandButton action="#{journalInput.processInput()}" value="Add entry"
+                                 oncomplete="PF('newEntryDialog').hide()" update="entryFeed"/>
+            </h:panelGrid>
+        </h:form>
+    </p:dialog>
+
+    <p:messages id="messages" showDetail="true" closable="true">
+        <p:autoUpdate />
+    </p:messages>
+
+    <p:dataScroller id="entryFeed" value="#{journalView.getAllJournalEntries()}" var="entry">
+        <p:outputPanel>
+            <h:panelGrid columns="1" cellpadding="5">
+                <h:outputText value="#{entry.title}" style="font-weight: bold"/>
+                <h:outputText value="#{entry.body}"/>
+            </h:panelGrid>
+        </p:outputPanel>
+    </p:dataScroller>
+
 </h:body>
 </html>
 

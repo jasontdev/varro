@@ -2,6 +2,8 @@ package com.jmtelfer.varro;
 
 import java.io.Serializable;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -34,7 +36,13 @@ public class JournalInput implements Serializable {
     }
 
     public String processInput() {
-        journal.addEntry(new JournalEntry(title, body));
+        journal.addEntry(new JournalEntry("abracadabra".getBytes(), title, body));
+
+        title = "";
+        body = "";
+
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(
+                FacesMessage.SEVERITY_INFO, "Info", "New journal entry created"));
 
         return null;
     }

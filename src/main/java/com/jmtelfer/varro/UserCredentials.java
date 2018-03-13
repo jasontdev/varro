@@ -21,6 +21,10 @@ public class UserCredentials implements Serializable {
     private String userName;
 
     @Lob
+    @Column(name = "USER_ID")
+    private byte[] userId;
+
+    @Lob
     @Column(name = "PASSWORD")
     private byte[] hashedPassword;
 
@@ -34,9 +38,18 @@ public class UserCredentials implements Serializable {
     public UserCredentials(String userName, String unHashedPassword) {
         this.userName = userName;
 
+        try {
+            MessageDigest md = MessageDigest.getInstance("SHA-1");
+            userId = md.digest(userName.getBytes());
+        } catch(NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+
+
         final Random r = new SecureRandom();
         r.nextBytes(salt);
 
+        //Salted password creation
         try {
             MessageDigest md = MessageDigest.getInstance("SHA-512");
             md.update(salt);

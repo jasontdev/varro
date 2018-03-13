@@ -25,11 +25,13 @@
                     <p:password id="pwd1" value="#{authentication.newPassword}"
                                 match="pwd2"
                                 feedback="true"
-                                required="true"/>
+                                required="true"
+                                inline="true"/>
                     Password:
                     <p:password id="pwd2" value="#{authentication.newPassword}"
                                 required="true"
-                                feedback="true"/>
+                                feedback="true"
+                                inline="true"/>
                 </h:panelGrid>
                 <h:panelGrid columns="1">
                     <p:commandButton value="Register"

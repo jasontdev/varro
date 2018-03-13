@@ -29,7 +29,7 @@ public class UserManager implements Serializable {
         return false;
     }
 
-    private boolean userExists(String username) {
+    public boolean userExists(String username) {
         Query query = users.createQuery("SELECT COUNT(credentials) FROM UserCredentials credentials " +
                 "WHERE credentials.userName =:arg1");
 
