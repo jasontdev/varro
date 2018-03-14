@@ -1,12 +1,12 @@
 package com.jmtelfer.varro;
 
-import javax.ejb.Stateless;
+import javax.ejb.Singleton;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import java.io.Serializable;
 
-@Stateless(name = "UserManagerEJB")
+@Singleton
 public class UserManager implements Serializable {
     private static final long serialVersionUID = 1L;
 

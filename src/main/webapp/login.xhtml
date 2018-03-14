@@ -19,13 +19,13 @@
                 <p:messages id="login_messages" showDetail="true" closable="true" autoUpdate="true"/>
                 <h:panelGrid columns="2" cellpadding="5">
                     Email:
-                    <p:inputText id="user" value="#{authentication.username}"/>
+                    <p:inputText id="user" value="#{loginBacking.username}"/>
                     Password:
-                    <p:password id="pwd" value="#{authentication.password}"/>
+                    <p:password id="pwd" value="#{loginBacking.password}"/>
                 </h:panelGrid>
                 <h:panelGrid style="text-align:center" columns="1">
                     <p:commandButton value="Log In" icon="fa fa-unlock"
-                                     action="#{authentication.login()}"/>
+                                     action="#{loginBacking.login()}"/>
                     <p:separator/>
                     <h:panelGroup>
                         New user?

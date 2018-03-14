@@ -1,13 +1,13 @@
 package com.jmtelfer.varro;
 
-import javax.ejb.Stateless;
+import javax.ejb.Singleton;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.io.Serializable;
 import java.util.List;
 
-@Stateless
-public class Journal implements Serializable {
+@Singleton
+public class JournalManager implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @PersistenceContext(unitName = "persistenceUnit")
@@ -16,11 +16,6 @@ public class Journal implements Serializable {
     public void addEntry(JournalEntry newEntry) {
         entries.persist(newEntry);
 
-    }
-
-    @Override
-    public String toString() {
-        return "Injected journal bean";
     }
 
     public List<JournalEntry> getAllEntries() {

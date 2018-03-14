@@ -3,6 +3,7 @@ package com.jmtelfer.varro;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 @Entity
 @NamedQuery(
@@ -19,7 +20,7 @@ public class JournalEntry implements Serializable {
     private byte[] userId;
 
     @Column(name="DATE")
-    private LocalDate createdOn;
+    private LocalDate date;
 
     @Column(name="TITLE")
     private String title;
@@ -35,7 +36,19 @@ public class JournalEntry implements Serializable {
         this.userId = userId;
         this.title = title;
         this.body = body;
-        this.createdOn = LocalDate.now();
+        this.date = LocalDate.now();
+    }
+
+    public LocalDate getDate() {
+        return date;
+    }
+
+    public void setDate(LocalDate date) {
+        this.date = date;
+    }
+
+    public String dateToString() {
+        return date.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")).toString();
     }
 
     public Long getId() {

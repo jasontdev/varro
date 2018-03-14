@@ -20,22 +20,22 @@
 
                 <h:panelGrid column="2" cellpadding="5">
                     Email:
-                    <p:inputText value="#{authentication.newUsername}" required="true"/>
+                    <p:inputText value="#{registerBacking.newUsername}" required="true"/>
                     Password:
-                    <p:password id="pwd1" value="#{authentication.newPassword}"
+                    <p:password id="pwd1" value="#{registerBacking.newPassword}"
                                 match="pwd2"
                                 feedback="true"
                                 required="true"
                                 inline="true"/>
                     Password:
-                    <p:password id="pwd2" value="#{authentication.newPassword}"
+                    <p:password id="pwd2" value="#{registerBacking.newPassword}"
                                 required="true"
                                 feedback="true"
                                 inline="true"/>
                 </h:panelGrid>
                 <h:panelGrid columns="1">
                     <p:commandButton value="Register"
-                                     action="#{authentication.registerUser}"/>
+                                     action="#{registerBacking.registerUser}"/>
                 </h:panelGrid>
             </p:dialog>
         </h:form>

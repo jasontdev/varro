@@ -1,18 +1,18 @@
 package com.jmtelfer.varro;
 
 import java.io.Serializable;
-import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
+import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
 @Named
-@SessionScoped
-public class JournalInput implements Serializable {
+@ViewScoped
+public class AddEntryBacking implements Serializable {
 
     @Inject
-    private Journal journal;
+    private JournalManager journalManager;
 
     private static final long serialVersionUID = 1L;
 
@@ -36,7 +36,10 @@ public class JournalInput implements Serializable {
     }
 
     public String processInput() {
-        journal.addEntry(new JournalEntry("abracadabra".getBytes(), title, body));
+        if(title.equals(""))
+            title = "Untitled entry";
+
+        journalManager.addEntry(new JournalEntry("abracadabra".getBytes(), title, body));
 
         title = "";
         body = "";

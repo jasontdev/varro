@@ -14,9 +14,7 @@
                              icon="ui-icon-document"/>
         </f:facet>
         <f:facet name="right">
-            <p:commandButton type="button" title="Save" icon="ui-icon-disk"/>
-            <p:commandButton type="button" title="Delete" icon="ui-icon-trash"/>
-            <p:commandButton type="button" title="Print" icon="ui-icon-print"/>
+
         </f:facet>
     </p:toolbar>
     <p:sticky target="tb_top"/>
@@ -24,25 +22,30 @@
     <p:dialog header="Add new journal entry" widgetVar="newEntryDialog" modal="true">
         <h:form>
             <h:panelGrid columns="1">
-                <p:inputText value="#{journalInput.title}"/>
-                <p:inputTextarea value="#{journalInput.body}" cols="60" rows="20"/>
-                <p:commandButton action="#{journalInput.processInput()}" value="Add entry"
+                <p:inputText value="#{addEntryBacking.title}"/>
+                <p:inputTextarea value="#{addEntryBacking.body}" cols="60" rows="20"/>
+                <p:commandButton action="#{addEntryBacking.processInput()}" value="Add entry"
                                  oncomplete="PF('newEntryDialog').hide()" update="entryFeed"/>
             </h:panelGrid>
         </h:form>
     </p:dialog>
 
     <p:messages id="messages" showDetail="true" closable="true">
-        <p:autoUpdate />
+        <p:autoUpdate/>
     </p:messages>
 
-    <p:dataScroller id="entryFeed" value="#{journalView.getAllJournalEntries()}" var="entry">
-        <p:outputPanel>
-            <h:panelGrid columns="1" cellpadding="5">
-                <h:outputText value="#{entry.title}" style="font-weight: bold"/>
-                <h:outputText value="#{entry.body}"/>
-            </h:panelGrid>
-        </p:outputPanel>
+    <p:dataScroller id="entryFeed" value="#{journalAppBacking.getAllJournalEntries()}"
+                    var="entry">
+        <p:panel>
+            <f:facet name="header" style="font-weight: bold;">
+                #{entry.title} - #{entry.dateToString()}
+            </f:facet>
+            <h:outputText value="#{entry.body}"/>
+            <f:facet name="footer">
+                <p:commandButton type="button" title="Edit" icon="ui-icon-pencil"/>
+                <p:commandButton type="button" title="Delete" icon="ui-icon-trash"/>
+            </f:facet>
+        </p:panel>
     </p:dataScroller>
 
 </h:body>
