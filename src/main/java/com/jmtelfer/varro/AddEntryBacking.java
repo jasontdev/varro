@@ -14,10 +14,28 @@ public class AddEntryBacking implements Serializable {
     @Inject
     private JournalManager journalManager;
 
+    @Inject
+    private UserSession userSession;
+
     private static final long serialVersionUID = 1L;
 
     private String title;
     private String body;
+
+    public String processInput() {
+        if(title.equals(""))
+            title = "Untitled entry";
+
+        journalManager.addEntry(new JournalEntry(userSession.getId(), title, body));
+
+        title = "";
+        body = "";
+
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(
+                FacesMessage.SEVERITY_INFO, "Info", "New journal entry created"));
+
+        return null;
+    }
 
     public String getTitle() {
         return title;
@@ -35,18 +53,4 @@ public class AddEntryBacking implements Serializable {
         this.body = body;
     }
 
-    public String processInput() {
-        if(title.equals(""))
-            title = "Untitled entry";
-
-        journalManager.addEntry(new JournalEntry("abracadabra".getBytes(), title, body));
-
-        title = "";
-        body = "";
-
-        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(
-                FacesMessage.SEVERITY_INFO, "Info", "New journal entry created"));
-
-        return null;
-    }
 }

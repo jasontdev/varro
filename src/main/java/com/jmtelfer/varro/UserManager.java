@@ -41,7 +41,7 @@ public class UserManager implements Serializable {
         return false;
     }
 
-    public boolean login(String username, String password) {
+    public Long login(String username, String password) {
         if(userExists(username)) {
             Query query = users.createQuery("SELECT credentials FROM UserCredentials credentials " +
                                             "WHERE credentials.userName =:arg1");
@@ -51,14 +51,14 @@ public class UserManager implements Serializable {
 
             if(storedCredentials.matches(username, password)) {
                 System.out.println("User: " + username + " successfully authenticated\n");
-                return true;
+                return storedCredentials.getId();
             } else {
                 System.out.println("Password for user: " + username + " is invalid\n");
-                return false;
+                return -1L;
             }
         } else {
             System.out.println("User: " + username + " does not exist\n");
-            return false;
+            return -1L;
         }
     }
 }

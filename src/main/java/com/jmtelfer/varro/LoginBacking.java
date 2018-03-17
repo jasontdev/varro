@@ -16,9 +16,16 @@ public class LoginBacking implements Serializable {
     @Inject
     private UserManager users;
 
+    @Inject
+    private UserSession userSession;
+
     public String login() {
-        if(users.login(username, password))
+        Long userId = users.login(username, password);
+
+        if (userId.longValue() > 0L) {
+            userSession.setId(userId);
             return "journal.xhtml";
+        }
 
         FacesContext.getCurrentInstance().addMessage(null, new
                 FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", "Login attempt failed"));

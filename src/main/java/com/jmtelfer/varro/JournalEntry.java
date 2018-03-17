@@ -6,18 +6,19 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 @Entity
+@Table(name="JOURNAL")
 @NamedQuery(
         name="findAllEntries",
         query="SELECT entry FROM JournalEntry entry")
+
 public class JournalEntry implements Serializable {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    @Column(name = "ENTRY_ID")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long entryID;
 
-    //Entity fields
-    @Column(name="USER_ID")
-    @Lob
-    private byte[] userId;
+    @Column(name = "USER_ID")
+    private Long id;
 
     @Column(name="DATE")
     private LocalDate date;
@@ -32,8 +33,8 @@ public class JournalEntry implements Serializable {
     public JournalEntry() {
     }
 
-    public JournalEntry(byte[] userId, String title, String body) {
-        this.userId = userId;
+    public JournalEntry(Long id, String title, String body) {
+        this.id = id;
         this.title = title;
         this.body = body;
         this.date = LocalDate.now();
@@ -73,5 +74,13 @@ public class JournalEntry implements Serializable {
 
     public void setBody(String body) {
         this.body = body;
+    }
+
+    public Long getEntryID() {
+        return entryID;
+    }
+
+    public void setEntryID(Long entry) {
+        this.entryID = entryID;
     }
 }

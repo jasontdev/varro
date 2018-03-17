@@ -11,7 +11,15 @@
     <p:toolbar id="tb_top">
         <f:facet name="left">
             <p:commandButton onclick="PF('newEntryDialog').show()" value="New entry"
-                             icon="ui-icon-document"/>
+                             icon="fa fa-plus"/>
+        </f:facet>
+        <f:facet name="right">
+            <h:form>
+                <p:menuButton icon="fa fa-bars">
+                    <p:menuitem value="Logout" action="#{journalAppBacking.logout}" icon="fa fa-sign-out"/>
+                    <p:menuitem value="About Varro" onclick="PF('aboutVarro').show()" icon="fa fa-info-circle"/>
+                </p:menuButton>
+            </h:form>
         </f:facet>
         <f:facet name="right">
 
@@ -19,13 +27,30 @@
     </p:toolbar>
     <p:sticky target="tb_top"/>
 
-    <p:dialog header="Add new journal entry" widgetVar="newEntryDialog" modal="true">
+    <p:dialog header="About varro" widgetVar="aboutVarro">
+        For more information, please check out the
+        <a href="http://www.github.com/jmtelfer/varro">Varro repository at Github.</a>
+
+    </p:dialog>
+
+    <p:dialog header="Add new journal entry" id="newEntryDialog" widgetVar="newEntryDialog" modal="true">
         <h:form>
             <h:panelGrid columns="1">
                 <p:inputText value="#{addEntryBacking.title}"/>
                 <p:inputTextarea value="#{addEntryBacking.body}" cols="60" rows="20"/>
                 <p:commandButton action="#{addEntryBacking.processInput()}" value="Add entry"
-                                 oncomplete="PF('newEntryDialog').hide()" update="entryFeed"/>
+                                 oncomplete="PF('newEntryDialog').hide()" update="entryFeed newEntryDialog"/>
+            </h:panelGrid>
+        </h:form>
+    </p:dialog>
+
+    <p:dialog header="Edit journal entry" id="editEntryDialog" widgetVar="editEntryDialog" modal="true">
+        <h:form>
+            <h:panelGrid columns="1">
+                <p:inputText value="#{modifyEntryBacking.title}"/>
+                <p:inputTextarea value="#{modifyEntryBacking.body}" cols="60" rows="20"/>
+                <p:commandButton action="#{modifyEntryBacking.update()}" value="Save changes"
+                                 oncomplete="PF('editEntryDialog').hide()" update="entryFeed"/>
             </h:panelGrid>
         </h:form>
     </p:dialog>
@@ -34,7 +59,7 @@
         <p:autoUpdate/>
     </p:messages>
 
-    <p:dataScroller id="entryFeed" value="#{journalAppBacking.getAllJournalEntries()}"
+    <p:dataScroller id="entryFeed" value="#{journalAppBacking.getJournalEntriesByUser()}"
                     var="entry">
         <p:panel>
             <f:facet name="header" style="font-weight: bold;">
@@ -42,8 +67,12 @@
             </f:facet>
             <h:outputText value="#{entry.body}"/>
             <f:facet name="footer">
-                <p:commandButton type="button" title="Edit" icon="ui-icon-pencil"/>
-                <p:commandButton type="button" title="Delete" icon="ui-icon-trash"/>
+                <p:commandButton title="Edit" action="#{modifyEntryBacking.loadEntry(entry)}"
+                                 oncomplete="PF('editEntryDialog').show()" update="editEntryDialog"
+                                 icon="fa fa-edit"/>
+                <p:commandButton title="Delete" action="#{modifyEntryBacking.deleteEntry(entry)}"
+                                 update="entryFeed" icon="fa fa-trash">
+                </p:commandButton>
             </f:facet>
         </p:panel>
     </p:dataScroller>

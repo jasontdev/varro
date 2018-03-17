@@ -9,20 +9,18 @@ import java.util.Arrays;
 import java.util.Random;
 
 @Entity
+@Table(name="USERS")
 @NamedQuery(name="findUserCredentials",
             query="SELECT entry FROM JournalEntry entry")
 public class UserCredentials implements Serializable {
     @Id
+    @Column(name = "USER_ID")
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     //Entity fields
     @Column(name = "USERNAME")
     private String userName;
-
-    @Lob
-    @Column(name = "USER_ID")
-    private byte[] userId;
 
     @Lob
     @Column(name = "PASSWORD")
@@ -37,14 +35,6 @@ public class UserCredentials implements Serializable {
 
     public UserCredentials(String userName, String unHashedPassword) {
         this.userName = userName;
-
-        try {
-            MessageDigest md = MessageDigest.getInstance("SHA-1");
-            userId = md.digest(userName.getBytes());
-        } catch(NoSuchAlgorithmException e) {
-            e.printStackTrace();
-        }
-
 
         final Random r = new SecureRandom();
         r.nextBytes(salt);
