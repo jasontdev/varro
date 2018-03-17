@@ -1,4 +1,10 @@
-package com.jmtelfer.varro;
+/*
+ * Copyright (c) 2018. Jason Telfer.
+ */
+
+package com.jmtelfer.varro.service;
+
+import com.jmtelfer.varro.entity.UserCredentials;
 
 import javax.ejb.Singleton;
 import javax.persistence.EntityManager;
@@ -50,14 +56,14 @@ public class UserManager implements Serializable {
             UserCredentials storedCredentials = (UserCredentials) query.getSingleResult();
 
             if(storedCredentials.matches(username, password)) {
-                System.out.println("User: " + username + " successfully authenticated\n");
+                System.out.println("CurrentUser: " + username + " successfully authenticated\n");
                 return storedCredentials.getId();
             } else {
                 System.out.println("Password for user: " + username + " is invalid\n");
                 return -1L;
             }
         } else {
-            System.out.println("User: " + username + " does not exist\n");
+            System.out.println("CurrentUser: " + username + " does not exist\n");
             return -1L;
         }
     }

@@ -1,4 +1,8 @@
-package com.jmtelfer.varro;
+/*
+ * Copyright (c) 2018. Jason Telfer.
+ */
+
+package com.jmtelfer.varro.session;
 
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
@@ -6,7 +10,7 @@ import java.io.Serializable;
 
 @Named
 @SessionScoped
-public class UserSession implements Serializable {
+public class CurrentUser implements Serializable {
     private Long id = -1L;
 
     public Long getId() {

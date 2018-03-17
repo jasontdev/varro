@@ -1,4 +1,11 @@
-package com.jmtelfer.varro;
+/*
+ * Copyright (c) 2018. Jason Telfer.
+ */
+
+package com.jmtelfer.varro.backing;
+
+import com.jmtelfer.varro.session.CurrentUser;
+import com.jmtelfer.varro.service.UserManager;
 
 import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
@@ -9,7 +16,7 @@ import java.io.Serializable;
 
 @Named
 @RequestScoped
-public class LoginBacking implements Serializable {
+public class Login implements Serializable {
     private String username;
     private String password;
 
@@ -17,13 +24,13 @@ public class LoginBacking implements Serializable {
     private UserManager users;
 
     @Inject
-    private UserSession userSession;
+    private CurrentUser currentUser;
 
     public String login() {
         Long userId = users.login(username, password);
 
         if (userId.longValue() > 0L) {
-            userSession.setId(userId);
+            currentUser.setId(userId);
             return "journal.xhtml";
         }
 

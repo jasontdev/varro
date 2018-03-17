@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ Copyright (c) 2018. Jason Telfer.
+  -->
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
@@ -16,7 +20,7 @@
         <f:facet name="right">
             <h:form>
                 <p:menuButton icon="fa fa-bars">
-                    <p:menuitem value="Logout" action="#{journalAppBacking.logout}" icon="fa fa-sign-out"/>
+                    <p:menuitem value="Logout" action="#{entryFeed.logout}" icon="fa fa-sign-out"/>
                     <p:menuitem value="About Varro" onclick="PF('aboutVarro').show()" icon="fa fa-info-circle"/>
                 </p:menuButton>
             </h:form>
@@ -36,9 +40,9 @@
     <p:dialog header="Add new journal entry" id="newEntryDialog" widgetVar="newEntryDialog" modal="true">
         <h:form>
             <h:panelGrid columns="1">
-                <p:inputText value="#{addEntryBacking.title}"/>
-                <p:inputTextarea value="#{addEntryBacking.body}" cols="60" rows="20"/>
-                <p:commandButton action="#{addEntryBacking.processInput()}" value="Add entry"
+                <p:inputText value="#{addNewEntry.title}"/>
+                <p:inputTextarea value="#{addNewEntry.body}" cols="60" rows="20"/>
+                <p:commandButton action="#{addNewEntry.processInput()}" value="Add entry"
                                  oncomplete="PF('newEntryDialog').hide()" update="entryFeed newEntryDialog"/>
             </h:panelGrid>
         </h:form>
@@ -47,9 +51,9 @@
     <p:dialog header="Edit journal entry" id="editEntryDialog" widgetVar="editEntryDialog" modal="true">
         <h:form>
             <h:panelGrid columns="1">
-                <p:inputText value="#{modifyEntryBacking.title}"/>
-                <p:inputTextarea value="#{modifyEntryBacking.body}" cols="60" rows="20"/>
-                <p:commandButton action="#{modifyEntryBacking.update()}" value="Save changes"
+                <p:inputText value="#{modifyEntry.title}"/>
+                <p:inputTextarea value="#{modifyEntry.body}" cols="60" rows="20"/>
+                <p:commandButton action="#{modifyEntry.update()}" value="Save changes"
                                  oncomplete="PF('editEntryDialog').hide()" update="entryFeed"/>
             </h:panelGrid>
         </h:form>
@@ -59,7 +63,7 @@
         <p:autoUpdate/>
     </p:messages>
 
-    <p:dataScroller id="entryFeed" value="#{journalAppBacking.getJournalEntriesByUser()}"
+    <p:dataScroller id="entryFeed" value="#{entryFeed.getJournalEntriesByUser()}"
                     var="entry">
         <p:panel>
             <f:facet name="header" style="font-weight: bold;">
@@ -67,10 +71,10 @@
             </f:facet>
             <h:outputText value="#{entry.body}"/>
             <f:facet name="footer">
-                <p:commandButton title="Edit" action="#{modifyEntryBacking.loadEntry(entry)}"
+                <p:commandButton title="Edit" action="#{modifyEntry.loadEntry(entry)}"
                                  oncomplete="PF('editEntryDialog').show()" update="editEntryDialog"
                                  icon="fa fa-edit"/>
-                <p:commandButton title="Delete" action="#{modifyEntryBacking.deleteEntry(entry)}"
+                <p:commandButton title="Delete" action="#{modifyEntry.deleteEntry(entry)}"
                                  update="entryFeed" icon="fa fa-trash">
                 </p:commandButton>
             </f:facet>

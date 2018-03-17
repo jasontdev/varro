@@ -1,4 +1,11 @@
-package com.jmtelfer.varro;
+/*
+ * Copyright (c) 2018. Jason Telfer.
+ */
+
+package com.jmtelfer.varro.backing;
+
+import com.jmtelfer.varro.entity.JournalEntry;
+import com.jmtelfer.varro.service.JournalManager;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
@@ -9,7 +16,7 @@ import java.io.Serializable;
 
 @Named
 @ViewScoped
-public class ModifyEntryBacking implements Serializable {
+public class ModifyEntry implements Serializable {
     @Inject
     JournalManager journalManager;
 

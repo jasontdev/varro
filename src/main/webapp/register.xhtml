@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ Copyright (c) 2018. Jason Telfer.
+  -->
+
 <!DOCTYPE html
         PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -20,22 +24,22 @@
 
                 <h:panelGrid column="2" cellpadding="5">
                     Email:
-                    <p:inputText value="#{registerBacking.newUsername}" required="true"/>
+                    <p:inputText value="#{registration.newUsername}" required="true"/>
                     Password:
-                    <p:password id="pwd1" value="#{registerBacking.newPassword}"
+                    <p:password id="pwd1" value="#{registration.newPassword}"
                                 match="pwd2"
                                 feedback="true"
                                 required="true"
                                 inline="true"/>
                     Password:
-                    <p:password id="pwd2" value="#{registerBacking.newPassword}"
+                    <p:password id="pwd2" value="#{registration.newPassword}"
                                 required="true"
                                 feedback="true"
                                 inline="true"/>
                 </h:panelGrid>
                 <h:panelGrid columns="1">
                     <p:commandButton value="Register"
-                                     action="#{registerBacking.registerUser}"/>
+                                     action="#{registration.registerUser}"/>
                 </h:panelGrid>
             </p:dialog>
         </h:form>

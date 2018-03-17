@@ -1,4 +1,8 @@
-package com.jmtelfer.varro;
+/*
+ * Copyright (c) 2018. Jason Telfer.
+ */
+
+package com.jmtelfer.varro.entity;
 
 import javax.persistence.*;
 import java.io.Serializable;

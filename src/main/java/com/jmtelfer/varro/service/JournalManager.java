@@ -1,4 +1,10 @@
-package com.jmtelfer.varro;
+/*
+ * Copyright (c) 2018. Jason Telfer.
+ */
+
+package com.jmtelfer.varro.service;
+
+import com.jmtelfer.varro.entity.JournalEntry;
 
 import javax.ejb.Singleton;
 import javax.persistence.EntityManager;

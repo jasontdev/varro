@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ Copyright (c) 2018. Jason Telfer.
+  -->
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
@@ -19,13 +23,13 @@
                 <p:messages id="login_messages" showDetail="true" closable="true" autoUpdate="true"/>
                 <h:panelGrid columns="2" cellpadding="5">
                     Email:
-                    <p:inputText id="user" value="#{loginBacking.username}"/>
+                    <p:inputText id="user" value="#{login.username}"/>
                     Password:
-                    <p:password id="pwd" value="#{loginBacking.password}"/>
+                    <p:password id="pwd" value="#{login.password}"/>
                 </h:panelGrid>
                 <h:panelGrid style="text-align:center" columns="1">
                     <p:commandButton value="Log In" icon="fa fa-unlock"
-                                     action="#{loginBacking.login()}"/>
+                                     action="#{login.login()}"/>
                     <p:separator/>
                     <h:panelGroup>
                         New user?

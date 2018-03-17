@@ -1,4 +1,10 @@
-package com.jmtelfer.varro;
+/*
+ * Copyright (c) 2018. Jason Telfer.
+ */
+
+package com.jmtelfer.varro.backing;
+
+import com.jmtelfer.varro.service.UserManager;
 
 import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
@@ -9,7 +15,7 @@ import java.io.Serializable;
 
 @Named
 @RequestScoped
-public class RegisterBacking implements Serializable {
+public class Registration implements Serializable {
 
     private String newPassword;
     private String newUsername;

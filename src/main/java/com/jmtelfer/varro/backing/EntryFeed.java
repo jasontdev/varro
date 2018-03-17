@@ -1,7 +1,14 @@
-package com.jmtelfer.varro;
+/*
+ * Copyright (c) 2018. Jason Telfer.
+ */
+
+package com.jmtelfer.varro.backing;
+
+import com.jmtelfer.varro.entity.JournalEntry;
+import com.jmtelfer.varro.service.JournalManager;
+import com.jmtelfer.varro.session.CurrentUser;
 
 import javax.annotation.PostConstruct;
-import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
@@ -12,18 +19,18 @@ import java.util.List;
 @Named
 @ViewScoped
 
-public class JournalAppBacking implements Serializable {
+public class EntryFeed implements Serializable {
     public static final long serialVersionUID = 1L;
 
     @Inject
     private JournalManager journalManager;
 
     @Inject
-    private UserSession userSession;
+    private CurrentUser currentUser;
 
     @PostConstruct
     public void init() {
-        if(userSession.getId().equals(-1L)) {
+        if(currentUser.getId().equals(-1L)) {
             logout();
         }
     }
@@ -32,7 +39,7 @@ public class JournalAppBacking implements Serializable {
         return journalManager.getAllEntries();
     }
     public List<JournalEntry> getJournalEntriesByUser() {
-        return journalManager.getAllEntriesByUser(userSession.getId());
+        return journalManager.getAllEntriesByUser(currentUser.getId());
     }
     public String logout() {
         FacesContext.getCurrentInstance().getExternalContext().invalidateSession();

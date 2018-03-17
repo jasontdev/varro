@@ -1,4 +1,12 @@
-package com.jmtelfer.varro;
+/*
+ * Copyright (c) 2018. Jason Telfer.
+ */
+
+package com.jmtelfer.varro.backing;
+
+import com.jmtelfer.varro.entity.JournalEntry;
+import com.jmtelfer.varro.service.JournalManager;
+import com.jmtelfer.varro.session.CurrentUser;
 
 import java.io.Serializable;
 import javax.faces.application.FacesMessage;
@@ -9,13 +17,13 @@ import javax.inject.Named;
 
 @Named
 @ViewScoped
-public class AddEntryBacking implements Serializable {
+public class AddNewEntry implements Serializable {
 
     @Inject
     private JournalManager journalManager;
 
     @Inject
-    private UserSession userSession;
+    private CurrentUser currentUser;
 
     private static final long serialVersionUID = 1L;
 
@@ -26,7 +34,7 @@ public class AddEntryBacking implements Serializable {
         if(title.equals(""))
             title = "Untitled entry";
 
-        journalManager.addEntry(new JournalEntry(userSession.getId(), title, body));
+        journalManager.addEntry(new JournalEntry(currentUser.getId(), title, body));
 
         title = "";
         body = "";
