@@ -58,7 +58,7 @@ public class Registration implements Serializable {
         if(users.addNewCredentials(newUsername, newPassword)) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(
                     FacesMessage.SEVERITY_INFO, "Info", "Registration successful"));
-            return "login.xhtml";
+            return "/login.xhtml?faces-redirect=true";
          } else {
             FacesContext.getCurrentInstance().addMessage(null, new
                     FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", "Failed to register user"));

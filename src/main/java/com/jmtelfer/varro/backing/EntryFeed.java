@@ -28,11 +28,12 @@ public class EntryFeed implements Serializable {
     @Inject
     private CurrentUser currentUser;
 
-    @PostConstruct
-    public void init() {
+    public String loggedInCheck() {
         if(currentUser.getId().equals(-1L)) {
-            logout();
+            return logout();
         }
+
+        return null;
     }
 
     public List<JournalEntry> getAllJournalEntries() {

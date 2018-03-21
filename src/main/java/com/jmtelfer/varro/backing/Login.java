@@ -31,7 +31,7 @@ public class Login implements Serializable {
 
         if (userId.longValue() > 0L) {
             currentUser.setId(userId);
-            return "journal.xhtml";
+            return "/journal.xhtml?faces-redirect=true";
         }
 
         FacesContext.getCurrentInstance().addMessage(null, new

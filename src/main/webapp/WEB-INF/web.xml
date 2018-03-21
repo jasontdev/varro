@@ -25,4 +25,10 @@
         <param-name>primefaces.THEME</param-name>
         <param-value>bootstrap</param-value>
     </context-param>
+    <welcome-file-list>
+        <welcome-file>journal.xhtml</welcome-file>
+    </welcome-file-list>
+    <session-config>
+        <tracking-mode>COOKIE</tracking-mode>
+    </session-config>
 </web-app>
