@@ -9,7 +9,7 @@ import com.jmtelfer.varro.entity.JournalEntry;
 import javax.ejb.Singleton;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 import java.io.Serializable;
 import java.util.List;
 
@@ -17,7 +17,7 @@ import java.util.List;
 public class JournalManager implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    @PersistenceContext(unitName = "persistenceUnit")
+    @PersistenceContext(unitName = "VarroPersistenceUnit")
     EntityManager entries;
 
     public void addEntry(JournalEntry newEntry) {
@@ -34,8 +34,9 @@ public class JournalManager implements Serializable {
     }
 
     public List<JournalEntry> getAllEntriesByUser(Long id) {
-        Query query = entries.createQuery("SELECT entry FROM JournalEntry entry " +
-                "WHERE entry.id =:arg1 ORDER by entry.entryID DESC");
+        TypedQuery<JournalEntry> query = 
+                entries.createQuery("SELECT journalEntry FROM JournalEntry journalEntry " +
+                "WHERE journalEntry.id=:arg1 ORDER by journalEntry.entryID DESC", JournalEntry.class);
 
         query.setParameter("arg1", id);
 

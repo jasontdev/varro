@@ -12,10 +12,10 @@
 <h:head>
 </h:head>
 <f:metadata>
-    <f:viewAction action="#{entryFeed.loggedInCheck}" />
+    <f:viewAction action="#{entryFeed.loggedInCheck}"/>
 </f:metadata>
 <h:body>
-    <p:toolbar id="tb_top">
+    <p:toolbar id="tb_top" style="background-color: lightblue; background-image: none;">
         <f:facet name="left">
             <p:commandButton onclick="PF('newEntryDialog').show()" value="New entry"
                              icon="fa fa-plus"/>
@@ -69,15 +69,15 @@
     <p:dataScroller id="entryFeed" value="#{entryFeed.getJournalEntriesByUser()}"
                     var="entry">
         <p:panel>
-            <f:facet name="header" style="font-weight: bold;">
+            <f:facet name="header" >
                 #{entry.title} - #{entry.dateToString()}
             </f:facet>
             <h:outputText value="#{entry.body}"/>
             <f:facet name="footer">
-                <p:commandButton title="Edit" action="#{modifyEntry.loadEntry(entry)}"
+                <p:commandButton title="Edit" value="Edit" action="#{modifyEntry.loadEntry(entry)}"
                                  oncomplete="PF('editEntryDialog').show()" update="editEntryDialog"
                                  icon="fa fa-edit"/>
-                <p:commandButton title="Delete" action="#{modifyEntry.deleteEntry(entry)}"
+                <p:commandButton title="Delete" value="Delete" action="#{modifyEntry.deleteEntry(entry)}"
                                  update="entryFeed" icon="fa fa-trash">
                 </p:commandButton>
             </f:facet>

@@ -16,7 +16,7 @@ import java.io.Serializable;
 public class UserManager implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    @PersistenceContext(unitName = "persistenceUnit")
+    @PersistenceContext(unitName = "VarroPersistenceUnit")
     EntityManager users;
 
     public UserManager() {
@@ -29,7 +29,9 @@ public class UserManager implements Serializable {
         if (!userExists(credentials.getUserName())) {
             System.out.println("Creating new user: " + username + "\n");
             users.persist(credentials);
+            
             return true;
+            
         }
         System.out.println("Failed to create new user: " + username + "\n");
         return false;
@@ -41,10 +43,7 @@ public class UserManager implements Serializable {
 
         query.setParameter("arg1", username);
 
-        if ((Long) query.getSingleResult() > 0) {
-            return true;
-        }
-        return false;
+        return (Long) query.getSingleResult() > 0;
     }
 
     public Long login(String username, String password) {

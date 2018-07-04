@@ -53,7 +53,7 @@ public class JournalEntry implements Serializable {
     }
 
     public String dateToString() {
-        return date.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")).toString();
+        return date.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
     }
 
     public Long getId() {
@@ -84,7 +84,7 @@ public class JournalEntry implements Serializable {
         return entryID;
     }
 
-    public void setEntryID(Long entry) {
+    public void setEntryID(Long entryID) {
         this.entryID = entryID;
     }
 }

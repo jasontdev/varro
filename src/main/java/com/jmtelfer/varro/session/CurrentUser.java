@@ -20,4 +20,8 @@ public class CurrentUser implements Serializable {
     public void setId(Long id) {
         this.id = id;
     }
+    
+    public void logout() {
+        this.id = -1L;
+    }
 }

@@ -8,11 +8,13 @@ h1, h2, h3 {
 
 .login_banner {
     text-align: center;
-    font-size:25px;
+    color: azure;
+    text-shadow: 0 0 4px darkslategrey;   
+    font-size:30px;
     height:100px;
     width:100%;
     display:table;
-    background-color:#c0ced5;
+    background-color:lightblue;
 }
 
 .journal_banner {

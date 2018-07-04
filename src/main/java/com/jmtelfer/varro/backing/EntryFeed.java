@@ -8,8 +8,6 @@ import com.jmtelfer.varro.entity.JournalEntry;
 import com.jmtelfer.varro.service.JournalManager;
 import com.jmtelfer.varro.session.CurrentUser;
 
-import javax.annotation.PostConstruct;
-import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -43,7 +41,8 @@ public class EntryFeed implements Serializable {
         return journalManager.getAllEntriesByUser(currentUser.getId());
     }
     public String logout() {
-        FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
-        return "/login.xhtml?faces-redirect=true";
+        currentUser.logout();
+        
+        return "/login.xhtml";
     }
 }

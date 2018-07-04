@@ -29,7 +29,7 @@ public class Login implements Serializable {
     public String login() {
         Long userId = users.login(username, password);
 
-        if (userId.longValue() > 0L) {
+        if (userId > 0L) {
             currentUser.setId(userId);
             return "/journal.xhtml?faces-redirect=true";
         }

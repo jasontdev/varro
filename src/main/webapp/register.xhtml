@@ -19,10 +19,10 @@
     <div class="main">
         <h:form>
             <p:dialog id="register_dialog" widgetVar="register_dialog" header="Create new account"
-                      modal="true" visible="true">
+                      modal="true" visible="true" closable="false">
                 <p:messages id="messages" showDetail="true" closable="true" autoUpdate="true"/>
 
-                <h:panelGrid column="2" cellpadding="5">
+                <h:panelGrid columns="2" cellpadding="5">
                     Email:
                     <p:inputText value="#{registration.newUsername}" required="true"/>
                     Password:
