@@ -13,25 +13,18 @@ import java.util.Arrays;
 import java.util.Random;
 
 @Entity
-@Table(name = "USERS")
-@NamedQuery(name = "findUserCredentials",
-        query = "SELECT credentials FROM UserCredentials credentials")
 public class UserCredentials implements Serializable {
     @Id
-    @Column(name = "USER_ID")
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     //Entity fields
-    @Column(name = "USERNAME")
     private String userName;
 
     @Lob
-    @Column(name = "PASSWORD")
     private byte[] hashedPassword;
 
     @Lob
-    @Column(name = "SALT")
     private byte[] salt = new byte[32];
 
     public UserCredentials() {
@@ -91,10 +84,10 @@ public class UserCredentials implements Serializable {
 
             try {
                 md = MessageDigest.getInstance("SHA-512");
-            } catch (NoSuchAlgorithmException e) {
+                md.update(this.salt);
+            } catch (Exception e) {
                 e.printStackTrace();
             }
-            md.update(this.salt);
 
             if (Arrays.equals(md.digest(password.getBytes()), this.getHashedPassword()))
                 return true;

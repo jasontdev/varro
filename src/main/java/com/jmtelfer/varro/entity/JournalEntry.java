@@ -10,28 +10,18 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 @Entity
-@Table(name="JOURNAL")
-@NamedQuery(
-        name="findAllEntries",
-        query="SELECT entry FROM JournalEntry entry")
-
 public class JournalEntry implements Serializable {
     @Id
-    @Column(name = "ENTRY_ID")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long entryID;
 
-    @Column(name = "USER_ID")
     private Long id;
 
-    @Column(name="DATE")
     private LocalDate date;
 
-    @Column(name="TITLE")
     private String title;
 
     @Lob
-    @Column(name="BODY")
     private String body;
 
     public JournalEntry() {

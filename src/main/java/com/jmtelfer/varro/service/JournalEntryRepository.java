@@ -20,31 +20,26 @@ public class JournalEntryRepository implements Serializable {
     @PersistenceContext(unitName = "VarroPersistenceUnit")
     EntityManager entries;
 
-    public void addEntry(JournalEntry newEntry) {
-        entries.persist(newEntry);
-
+    public void addEntry(JournalEntry newJournalEntry) {
+        entries.persist(newJournalEntry);
     }
 
-    public void updateEntry(JournalEntry updatedEntry) {
-        entries.merge(updatedEntry);
+    public void updateEntry(JournalEntry updatedJournalEntry) {
+        entries.merge(updatedJournalEntry);
     }
 
-    public void deleteEntry(JournalEntry entryToDelete) {
-        entries.remove(entries.contains(entryToDelete) ? entryToDelete : entries.merge(entryToDelete));
+    public void deleteEntry(JournalEntry journalEntryToDelete) {
+        entries.remove(entries.contains(journalEntryToDelete) ? journalEntryToDelete : entries.merge(journalEntryToDelete));
     }
 
     public List<JournalEntry> getAllEntriesByUser(Long id) {
-        TypedQuery<JournalEntry> query = 
+        TypedQuery<JournalEntry> query =
                 entries.createQuery("SELECT journalEntry FROM JournalEntry journalEntry " +
-                "WHERE journalEntry.id=:arg1 ORDER by journalEntry.entryID DESC", JournalEntry.class);
+                        "WHERE journalEntry.id =:arg1 ORDER by journalEntry.entryID DESC", JournalEntry.class);
 
         query.setParameter("arg1", id);
 
         return query.getResultList();
-    }
-
-    public List<JournalEntry> getAllEntries() {
-        return entries.createNamedQuery("findAllEntries").getResultList();
     }
 
     public JournalEntry getEntryByID(Long entryID) {

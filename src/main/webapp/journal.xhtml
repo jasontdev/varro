@@ -17,7 +17,7 @@
 <h:body>
     <p:toolbar id="tb_top" style="background-color: lightblue; background-image: none;">
         <f:facet name="left">
-            <p:commandButton onclick="PF('newEntryDialog').show()" value="New entry"
+            <p:commandButton onclick="PF('newEntryDialog').show()" value="New journalEntry"
                              icon="fa fa-plus"/>
         </f:facet>
         <f:facet name="right">
@@ -40,18 +40,18 @@
 
     </p:dialog>
 
-    <p:dialog header="Add new journal entry" id="newEntryDialog" widgetVar="newEntryDialog" modal="true">
+    <p:dialog header="Add new journal journalEntry" id="newEntryDialog" widgetVar="newEntryDialog" modal="true">
         <h:form>
             <h:panelGrid columns="1">
                 <p:inputText value="#{addNewEntry.title}"/>
                 <p:inputTextarea value="#{addNewEntry.body}" cols="60" rows="20"/>
-                <p:commandButton action="#{addNewEntry.processInput()}" value="Add entry"
+                <p:commandButton action="#{addNewEntry.processInput()}" value="Add journalEntry"
                                  oncomplete="PF('newEntryDialog').hide()" update="entryFeed newEntryDialog"/>
             </h:panelGrid>
         </h:form>
     </p:dialog>
 
-    <p:dialog header="Edit journal entry" id="editEntryDialog" widgetVar="editEntryDialog" modal="true">
+    <p:dialog header="Edit journal journalEntry" id="editEntryDialog" widgetVar="editEntryDialog" modal="true">
         <h:form>
             <h:panelGrid columns="1">
                 <p:inputText value="#{modifyEntry.title}"/>
@@ -67,17 +67,17 @@
     </p:messages>
 
     <p:dataScroller id="entryFeed" value="#{entryFeed.getJournalEntriesByUser()}"
-                    var="entry">
+                    var="journalEntry">
         <p:panel>
             <f:facet name="header" >
-                #{entry.title} - #{entry.dateToString()}
+                #{journalEntry.title} - #{journalEntry.dateToString()}
             </f:facet>
-            <h:outputText value="#{entry.body}"/>
+            <h:outputText value="#{journalEntry.body}"/>
             <f:facet name="footer">
-                <p:commandButton title="Edit" value="Edit" action="#{modifyEntry.loadEntry(entry)}"
+                <p:commandButton title="Edit" value="Edit" action="#{modifyEntry.loadEntry(journalEntry)}"
                                  oncomplete="PF('editEntryDialog').show()" update="editEntryDialog"
                                  icon="fa fa-edit"/>
-                <p:commandButton title="Delete" value="Delete" action="#{modifyEntry.deleteEntry(entry)}"
+                <p:commandButton title="Delete" value="Delete" action="#{modifyEntry.deleteEntry(journalEntry)}"
                                  update="entryFeed" icon="fa fa-trash">
                 </p:commandButton>
             </f:facet>

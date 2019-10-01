@@ -34,9 +34,6 @@ public class EntryFeed implements Serializable {
         return null;
     }
 
-    public List<JournalEntry> getAllJournalEntries() {
-        return journalEntryRepository.getAllEntries();
-    }
     public List<JournalEntry> getJournalEntriesByUser() {
         return journalEntryRepository.getAllEntriesByUser(currentUser.getId());
     }
