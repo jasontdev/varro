@@ -5,7 +5,7 @@
 package com.jmtelfer.varro.backing;
 
 import com.jmtelfer.varro.session.CurrentUser;
-import com.jmtelfer.varro.service.UserManager;
+import com.jmtelfer.varro.service.UserRepository;
 
 import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
@@ -21,7 +21,7 @@ public class Login implements Serializable {
     private String password;
 
     @Inject
-    private UserManager users;
+    private UserRepository users;
 
     @Inject
     private CurrentUser currentUser;

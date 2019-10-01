@@ -5,7 +5,7 @@
 package com.jmtelfer.varro.backing;
 
 import com.jmtelfer.varro.entity.JournalEntry;
-import com.jmtelfer.varro.service.JournalManager;
+import com.jmtelfer.varro.service.JournalEntryRepository;
 import com.jmtelfer.varro.session.CurrentUser;
 
 import javax.faces.view.ViewScoped;
@@ -21,7 +21,7 @@ public class EntryFeed implements Serializable {
     public static final long serialVersionUID = 1L;
 
     @Inject
-    private JournalManager journalManager;
+    private JournalEntryRepository journalEntryRepository;
 
     @Inject
     private CurrentUser currentUser;
@@ -35,10 +35,10 @@ public class EntryFeed implements Serializable {
     }
 
     public List<JournalEntry> getAllJournalEntries() {
-        return journalManager.getAllEntries();
+        return journalEntryRepository.getAllEntries();
     }
     public List<JournalEntry> getJournalEntriesByUser() {
-        return journalManager.getAllEntriesByUser(currentUser.getId());
+        return journalEntryRepository.getAllEntriesByUser(currentUser.getId());
     }
     public String logout() {
         currentUser.logout();

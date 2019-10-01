@@ -13,9 +13,9 @@ import java.util.Arrays;
 import java.util.Random;
 
 @Entity
-@Table(name="USERS")
-@NamedQuery(name="findUserCredentials",
-            query="SELECT entry FROM JournalEntry entry")
+@Table(name = "USERS")
+@NamedQuery(name = "findUserCredentials",
+        query = "SELECT credentials FROM UserCredentials credentials")
 public class UserCredentials implements Serializable {
     @Id
     @Column(name = "USER_ID")
@@ -86,7 +86,7 @@ public class UserCredentials implements Serializable {
     }
 
     public boolean matches(String username, String password) {
-        if(username.equals(this.userName)) {
+        if (username.equals(this.userName)) {
             MessageDigest md = null;
 
             try {
@@ -96,9 +96,9 @@ public class UserCredentials implements Serializable {
             }
             md.update(this.salt);
 
-            if(Arrays.equals(md.digest(password.getBytes()), this.getHashedPassword())) {
+            if (Arrays.equals(md.digest(password.getBytes()), this.getHashedPassword()))
                 return true;
-            }
+
             return false;
         }
         return false;

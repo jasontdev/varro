@@ -5,7 +5,7 @@
 package com.jmtelfer.varro.backing;
 
 import com.jmtelfer.varro.entity.JournalEntry;
-import com.jmtelfer.varro.service.JournalManager;
+import com.jmtelfer.varro.service.JournalEntryRepository;
 import com.jmtelfer.varro.session.CurrentUser;
 
 import java.io.Serializable;
@@ -20,7 +20,7 @@ import javax.inject.Named;
 public class AddNewEntry implements Serializable {
 
     @Inject
-    private JournalManager journalManager;
+    private JournalEntryRepository journalEntryRepository;
 
     @Inject
     private CurrentUser currentUser;
@@ -34,7 +34,7 @@ public class AddNewEntry implements Serializable {
         if(title.equals(""))
             title = "Untitled entry";
 
-        journalManager.addEntry(new JournalEntry(currentUser.getId(), title, body));
+        journalEntryRepository.addEntry(new JournalEntry(currentUser.getId(), title, body));
 
         title = "";
         body = "";

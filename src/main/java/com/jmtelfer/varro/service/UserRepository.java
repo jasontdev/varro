@@ -13,13 +13,13 @@ import javax.persistence.Query;
 import java.io.Serializable;
 
 @Singleton
-public class UserManager implements Serializable {
+public class UserRepository implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @PersistenceContext(unitName = "VarroPersistenceUnit")
     EntityManager users;
 
-    public UserManager() {
+    public UserRepository() {
 
     }
 

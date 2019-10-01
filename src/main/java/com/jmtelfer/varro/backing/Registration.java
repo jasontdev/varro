@@ -3,7 +3,7 @@
  */
 package com.jmtelfer.varro.backing;
 
-import com.jmtelfer.varro.service.UserManager;
+import com.jmtelfer.varro.service.UserRepository;
 
 import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
@@ -20,7 +20,7 @@ public class Registration implements Serializable {
     private String newUsername;
 
     @Inject
-    private UserManager users;
+    private UserRepository users;
 
     public String registerUser() {
         //Reject blank username or password

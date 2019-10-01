@@ -14,7 +14,7 @@ import java.io.Serializable;
 import java.util.List;
 
 @Singleton
-public class JournalManager implements Serializable {
+public class JournalEntryRepository implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @PersistenceContext(unitName = "VarroPersistenceUnit")

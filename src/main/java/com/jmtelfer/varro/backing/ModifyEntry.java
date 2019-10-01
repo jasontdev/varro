@@ -5,7 +5,7 @@
 package com.jmtelfer.varro.backing;
 
 import com.jmtelfer.varro.entity.JournalEntry;
-import com.jmtelfer.varro.service.JournalManager;
+import com.jmtelfer.varro.service.JournalEntryRepository;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
@@ -18,7 +18,7 @@ import java.io.Serializable;
 @ViewScoped
 public class ModifyEntry implements Serializable {
     @Inject
-    JournalManager journalManager;
+    JournalEntryRepository journalEntryRepository;
 
     private JournalEntry journalEntry;
     private String title;
@@ -36,14 +36,14 @@ public class ModifyEntry implements Serializable {
         journalEntry.setTitle(title);
         journalEntry.setBody(body);
 
-        journalManager.updateEntry(journalEntry);
+        journalEntryRepository.updateEntry(journalEntry);
 
         return null;
     }
 
 
     public String deleteEntry(JournalEntry journalEntry) {
-        journalManager.deleteEntry(journalEntry);
+        journalEntryRepository.deleteEntry(journalEntry);
 
         FacesContext.getCurrentInstance().addMessage(null,
                 new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", "Journal entry removed"));
