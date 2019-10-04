@@ -21,12 +21,8 @@
         <servlet-name>Faces Servlet</servlet-name>
         <url-pattern>*.xhtml</url-pattern>
     </servlet-mapping>
-    <context-param>
-        <param-name>primefaces.FONT_AWESOME</param-name>
-        <param-value>true</param-value>
-    </context-param>
     <welcome-file-list>
-        <welcome-file>journal.xhtml</welcome-file>
+        <welcome-file>boots_login.xhtml</welcome-file>
     </welcome-file-list>
 </web-app>
 

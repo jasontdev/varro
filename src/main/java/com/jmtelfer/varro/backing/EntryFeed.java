@@ -40,6 +40,6 @@ public class EntryFeed implements Serializable {
     public String logout() {
         currentUser.logout();
         
-        return "/login.xhtml";
+        return "/login.html";
     }
 }
