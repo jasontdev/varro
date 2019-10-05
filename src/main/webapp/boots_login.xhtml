@@ -20,8 +20,6 @@
                     <b:column medium-screen="4">
                         <b:inputText value="#{login.username}"/>
                     </b:column>
-                    <b:column medium-screen="6">
-                    </b:column>
                 </b:row>
                 <b:row>
                     <b:column medium-screen="2">
@@ -30,12 +28,11 @@
                     <b:column medium-screen="4">
                         <b:inputSecret value="#{login.password}" placeholder="Password"/>
                     </b:column>
-                    <b:column medium-screen="2">
-                    </b:column>
                 </b:row>
                 <b:row>
                     <b:column medium-screen="2" offset="2">
-                        <b:commandButton look="primary" value="Login" action="#{login.login()}" style="width:100%"/>
+                        <b:commandButton look="primary" value="Login" action="#{login.login()}"
+                                         style="width:100%"/>
                     </b:column>
                     <b:column medium-screen="4">
                         New user?
