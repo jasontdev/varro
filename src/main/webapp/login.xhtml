@@ -7,7 +7,6 @@
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:p="http://primefaces.org/ui">
 <h:head>
     <link rel="stylesheet" href="css/main.css"/>
@@ -28,7 +27,7 @@
                     <p:password id="pwd" value="#{login.password}"/>
                 </h:panelGrid>
                 <h:panelGrid style="text-align:center" columns="1">
-                    <p:commandButton value="Log In" icon="fa fa-unlock"
+                    <p:commandButton value="Log In"
                                      action="#{login.login()}"/>
                     <p:separator/>
                     <h:panelGroup>
