@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ Copyright (c) 2018. Jason Telfer.
+  -->
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+<h:head>
+    <link rel="stylesheet" href="css/main.css"/>
+</h:head>
+<h:body>
+    <div class="login_banner">
+        <h1>varro</h1>
+        <h2>personal journal</h2>
+    </div>
+    <div class="main">
+        <h:form>
+            <p:dialog widgetVar="login_panel" header="Log In" closable="false" visible="true">
+                <p:messages id="login_messages" showDetail="true" closable="true" autoUpdate="true"/>
+                <h:panelGrid columns="2" cellpadding="5">
+                    Email:
+                    <p:inputText id="user" value="#{login.username}"/>
+                    Password:
+                    <p:password id="pwd" value="#{login.password}"/>
+                </h:panelGrid>
+                <h:panelGrid style="text-align:center" columns="1">
+                    <p:commandButton value="Log In"
+                                     action="#{login.login()}"/>
+                    <p:separator/>
+                    <h:panelGroup>
+                        New user?
+                        <h:link value="Register here" outcome="register"/>
+                    </h:panelGroup>
+                    <h:panelGroup/>
+                </h:panelGrid>
+            </p:dialog>
+        </h:form>
+    </div>
+</h:body>
+</html>
+

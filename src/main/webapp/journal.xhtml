@@ -1,89 +1,51 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!--
-  ~ Copyright (c) 2018. Jason Telfer.
-  -->
-
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:h="http://java.sun.com/jsf/html"
       xmlns:p="http://primefaces.org/ui"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+>
 <h:head>
+    <title>Varro Journal</title>
 </h:head>
-<f:metadata>
-    <f:viewAction action="#{entryFeed.loggedInCheck}"/>
-</f:metadata>
 <h:body>
-    <p:toolbar id="tb_top" style="background-color: lightblue; background-image: none;">
-        <f:facet name="left">
-            <p:commandButton onclick="PF('newEntryDialog').show()" value="New entry"
-                             icon="fa fa-plus"/>
-        </f:facet>
-        <f:facet name="right">
-            <h:form>
-                <p:menuButton icon="fa fa-bars">
-                    <p:menuitem value="Logout" action="#{entryFeed.logout}" icon="fa fa-sign-out"/>
-                    <p:menuitem value="About Varro" onclick="PF('aboutVarro').show()" icon="fa fa-info-circle"/>
-                </p:menuButton>
-            </h:form>
-        </f:facet>
-        <f:facet name="right">
+    <b:container>
+        <b:column>
+            <b:row>
+                <b:panel id="newEntryPanel" title="New entry" look="primary">
+                    <b:column>
+                        <h:form>
+                            <b:row>
+                                <b:inputText value="#{addNewEntry.title}"></b:inputText>
+                            </b:row>
+                            <b:row>
+                                <b:inputTextarea value="#{addNewEntry.body}" ></b:inputTextarea>
+                            </b:row>
+                            <b:row>
+                                <b:commandButton value="Submit" action="#{addNewEntry.processInput()}"/>
+                            </b:row>
+                        </h:form>
+                    </b:column>
 
-        </f:facet>
-    </p:toolbar>
-    <p:sticky target="tb_top"/>
+                </b:panel>
+            </b:row>
 
-    <p:dialog header="About varro" widgetVar="aboutVarro">
-        For more information, please check out the
-        <a href="http://www.github.com/jmtelfer/varro">Varro repository at Github.</a>
-
-    </p:dialog>
-
-    <p:dialog header="Add new journal entry" id="newEntryDialog" widgetVar="newEntryDialog" modal="true">
-        <h:form>
-            <h:panelGrid columns="1">
-                <p:inputText value="#{addNewEntry.title}"/>
-                <p:inputTextarea value="#{addNewEntry.body}" cols="60" rows="20"/>
-                <p:commandButton action="#{addNewEntry.processInput()}" value="Add entry"
-                                 oncomplete="PF('newEntryDialog').hide()" update="entryFeed newEntryDialog"/>
-            </h:panelGrid>
-        </h:form>
-    </p:dialog>
-
-    <p:dialog header="Edit journal entry" id="editEntryDialog" widgetVar="editEntryDialog" modal="true">
-        <h:form>
-            <h:panelGrid columns="1">
-                <p:inputText value="#{modifyEntry.title}"/>
-                <p:inputTextarea value="#{modifyEntry.body}" cols="60" rows="20"/>
-                <p:commandButton action="#{modifyEntry.update()}" value="Save changes"
-                                 oncomplete="PF('editEntryDialog').hide()" update="entryFeed"/>
-            </h:panelGrid>
-        </h:form>
-    </p:dialog>
-
-    <p:messages id="messages" showDetail="true" closable="true">
-        <p:autoUpdate/>
-    </p:messages>
-
-    <p:dataScroller id="entryFeed" value="#{entryFeed.getJournalEntriesByUser()}"
-                    var="entry">
-        <p:panel>
-            <f:facet name="header" >
-                #{entry.title} - #{entry.dateToString()}
-            </f:facet>
-            <h:outputText value="#{entry.body}"/>
-            <f:facet name="footer">
-                <p:commandButton title="Edit" value="Edit" action="#{modifyEntry.loadEntry(entry)}"
-                                 oncomplete="PF('editEntryDialog').show()" update="editEntryDialog"
-                                 icon="fa fa-edit"/>
-                <p:commandButton title="Delete" value="Delete" action="#{modifyEntry.deleteEntry(entry)}"
-                                 update="entryFeed" icon="fa fa-trash">
-                </p:commandButton>
-            </f:facet>
-        </p:panel>
-    </p:dataScroller>
-
+            <b:row>
+                <h:form>
+                    <p:dataScroller id="entryFeed" value="#{entryFeed.getJournalEntriesByUser()}"
+                                    var="entry">
+                        <b:panel title="#{entry.title} - #{entry.dateToString()}" look="primary">
+                            <h:outputText value="#{entry.body}"/>
+                            <f:facet name="footer">
+                                <b:commandButton value="Edit"/>
+                                <b:commandButton value="Delete" look="danger"/>
+                            </f:facet>
+                        </b:panel>
+                    </p:dataScroller>
+                </h:form>
+            </b:row>
+        </b:column>
+    </b:container>
 </h:body>
 </html>
-

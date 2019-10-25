@@ -1,44 +1,55 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!--
-  ~ Copyright (c) 2018. Jason Telfer.
-  -->
-
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:h="http://java.sun.com/jsf/html"
+>
 <h:head>
-    <link rel="stylesheet" href="css/main.css"/>
+    <title>Login to Varro</title>
 </h:head>
 <h:body>
-    <div class="login_banner">
-        <h1>varro</h1>
-        <h2>personal journal</h2>
-    </div>
-    <div class="main">
-        <h:form>
-            <p:dialog widgetVar="login_panel" header="Log In" closable="false" visible="true">
-                <p:messages id="login_messages" showDetail="true" closable="true" autoUpdate="true"/>
-                <h:panelGrid columns="2" cellpadding="5">
-                    Email:
-                    <p:inputText id="user" value="#{login.username}"/>
-                    Password:
-                    <p:password id="pwd" value="#{login.password}"/>
-                </h:panelGrid>
-                <h:panelGrid style="text-align:center" columns="1">
-                    <p:commandButton value="Log In"
-                                     action="#{login.login()}"/>
-                    <p:separator/>
-                    <h:panelGroup>
-                        New user?
-                        <h:link value="Register here" outcome="register"/>
-                    </h:panelGroup>
-                    <h:panelGroup/>
-                </h:panelGrid>
-            </p:dialog>
-        </h:form>
-    </div>
+    <h:form>
+        <b:container>
+            <h1>varro</h1>
+            <h3>personal journal</h3>
+                <b:panel title="Login to Varro"
+                         look="primary"
+                         collapsible="false"
+                         style="width:100%">
+
+                    <b:column medium-screen="6">
+                    <b:row>
+                        <b:column medium-screen="4">
+                            <h:outputText value="Username:"/>
+                        </b:column>
+                        <b:column medium-screen="8">
+                            <b:inputText value="#{login.username}"/>
+                        </b:column>
+                    </b:row>
+                    <b:row>
+                        <b:column medium-screen="4">
+                            <h:outputText value="Password:"/>
+                        </b:column>
+                        <b:column medium-screen="8">
+                            <b:inputSecret value="#{login.password}"/>
+                        </b:column>
+                    </b:row>
+                    <b:row>
+                        <b:column medium-screen="2" offset="4">
+                            <b:commandButton look="primary" value="Login" action="#{login.login()}"
+                                             style="width:100%"/>
+                        </b:column>
+                        <b:column medium-screen="6">
+                            New user?
+                            <b:link href="register.xhtml">Register here</b:link>
+                        </b:column>
+                    </b:row>
+                    </b:column>
+                    <b:column medium-screen="6">
+                        <b:messages auto-update="true"/>
+                    </b:column>
+                </b:panel>
+        </b:container>
+    </h:form>
 </h:body>
 </html>
-

@@ -43,10 +43,12 @@ public class ModifyEntry implements Serializable {
 
 
     public String deleteEntry(JournalEntry journalEntry) {
+        String journalEntryTitle = journalEntry.getTitle();
         journalEntryRepository.deleteEntry(journalEntry);
 
         FacesContext.getCurrentInstance().addMessage(null,
-                new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", "Journal journalEntry removed"));
+                new FacesMessage(FacesMessage.SEVERITY_INFO, "Info",
+                        "Journal " + journalEntryTitle + " removed"));
 
         return null;
     }

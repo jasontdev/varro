@@ -4,20 +4,26 @@
 
 package com.jmtelfer.varro.backing;
 
-import com.jmtelfer.varro.session.CurrentUser;
 import com.jmtelfer.varro.service.UserRepository;
+import com.jmtelfer.varro.session.CurrentUser;
 
 import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
 @Named
 @RequestScoped
 public class Login implements Serializable {
+    public static final long serialVersionUID = 1L;
+
+    @NotNull
     private String username;
+
+    @NotNull
     private String password;
 
     @Inject

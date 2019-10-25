@@ -6,18 +6,19 @@ package com.jmtelfer.varro.service;
 
 import com.jmtelfer.varro.entity.JournalEntry;
 
-import javax.ejb.Singleton;
+import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import java.io.Serializable;
 import java.util.List;
 
-@Singleton
+@Stateless
 public class JournalEntryRepository implements Serializable {
-    private static final long serialVersionUID = 1L;
 
-    @PersistenceContext(unitName = "VarroPersistenceUnit")
+    public static final long serialVersionUID = 1L;
+
+    @PersistenceContext(unitName = "VarroProductionPU")
     EntityManager entries;
 
     public void addEntry(JournalEntry newJournalEntry) {
@@ -38,7 +39,6 @@ public class JournalEntryRepository implements Serializable {
                         "WHERE journalEntry.id =:arg1 ORDER by journalEntry.entryID DESC", JournalEntry.class);
 
         query.setParameter("arg1", id);
-
         return query.getResultList();
     }
 
