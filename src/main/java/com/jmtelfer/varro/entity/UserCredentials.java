@@ -30,20 +30,26 @@ public class UserCredentials implements Serializable {
     public UserCredentials() {
     }
 
-    public UserCredentials(String userName, String unHashedPassword) {
+    public UserCredentials(String userName, String unhashedPassword) {
         this.userName = userName;
 
         final Random r = new SecureRandom();
         r.nextBytes(salt);
 
         //Salted password creation
+        this.hashedPassword = hashPassword(unhashedPassword, salt);
+    }
+
+    private static byte[] hashPassword(String unhashedPassword, byte[] salt) {
         try {
             MessageDigest md = MessageDigest.getInstance("SHA-512");
             md.update(salt);
-            hashedPassword = md.digest(unHashedPassword.getBytes());
+            return md.digest(unhashedPassword.getBytes());
         } catch (NoSuchAlgorithmException e) {
             System.out.println("NoSuchAlgorithmException encountered by "
                     + "UserCredentials.UserCredentials()");
+
+            return null;
         }
     }
 
@@ -79,23 +85,9 @@ public class UserCredentials implements Serializable {
         this.salt = salt;
     }
 
-    public boolean matches(String username, String password) {
-        if (username.equals(this.userName)) {
-            MessageDigest md = null;
-
-            try {
-                md = MessageDigest.getInstance("SHA-512");
-                md.update(this.salt);
-            } catch (NoSuchAlgorithmException e) {
-                System.out.println("NoSuchAlgorithmException encountered by "
-                        + "UserCredentials.matches()");
-            }
-
-            if (Arrays.equals(md.digest(password.getBytes()), this.getHashedPassword())) {
-                return true;
-            }
-
-            return false;
+    public boolean matches(String userName, String password) {
+        if (userName.equals(this.userName)) {
+            return Arrays.equals(hashPassword(password, salt), getHashedPassword());
         }
         return false;
     }
