@@ -1,7 +1,6 @@
 /*
  * Copyright (c) 2018. Jason Telfer.
  */
-
 package com.jmtelfer.varro.entity;
 
 import javax.persistence.*;
@@ -14,6 +13,7 @@ import java.util.Random;
 
 @Entity
 public class UserCredentials implements Serializable {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -42,7 +42,8 @@ public class UserCredentials implements Serializable {
             md.update(salt);
             hashedPassword = md.digest(unHashedPassword.getBytes());
         } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
+            System.out.println("NoSuchAlgorithmException encountered by "
+                    + "UserCredentials.UserCredentials()");
         }
     }
 
@@ -85,12 +86,14 @@ public class UserCredentials implements Serializable {
             try {
                 md = MessageDigest.getInstance("SHA-512");
                 md.update(this.salt);
-            } catch (Exception e) {
-                e.printStackTrace();
+            } catch (NoSuchAlgorithmException e) {
+                System.out.println("NoSuchAlgorithmException encountered by "
+                        + "UserCredentials.matches()");
             }
 
-            if (Arrays.equals(md.digest(password.getBytes()), this.getHashedPassword()))
+            if (Arrays.equals(md.digest(password.getBytes()), this.getHashedPassword())) {
                 return true;
+            }
 
             return false;
         }

@@ -5,47 +5,53 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
->
-<h:head>
-    <title>Varro Journal</title>
-</h:head>
-<h:body>
-    <b:container>
-        <b:column>
-            <b:row>
-                <b:panel id="newEntryPanel" title="New entry" look="primary">
-                    <b:column>
-                        <h:form>
-                            <b:row>
-                                <b:inputText value="#{addNewEntry.title}"></b:inputText>
-                            </b:row>
-                            <b:row>
-                                <b:inputTextarea value="#{addNewEntry.body}" ></b:inputTextarea>
-                            </b:row>
-                            <b:row>
-                                <b:commandButton value="Submit" action="#{addNewEntry.processInput()}"/>
-                            </b:row>
-                        </h:form>
-                    </b:column>
+      >
+    <h:head>
+        <title>Varro Journal</title>
+    </h:head>
+    <h:body>
+        <b:navBar brand="varro_note" brandHref="#">
+            <b:dropButton value="Settings" size="lg">
+                <b:navLink value="Logout" href="#"></b:navLink>
+                <b:navLink value="About" href="#"></b:navLink>
+            </b:dropButton>
+        </b:navBar>
+        <b:container>
+            <b:column>
+                <b:row>
+                    <b:panel id="newEntryPanel" title="New entry" look="primary">
+                        <b:column>
+                            <h:form>
+                                <b:row>
+                                    <b:inputText value="#{addNewEntry.title}"></b:inputText>
+                                </b:row>
+                                <b:row>
+                                    <b:inputTextarea value="#{addNewEntry.body}" ></b:inputTextarea>
+                                </b:row>
+                                <b:row>
+                                    <b:commandButton value="Submit" action="#{addNewEntry.processInput()}"/>
+                                </b:row>
+                            </h:form>
+                        </b:column>
 
-                </b:panel>
-            </b:row>
+                    </b:panel>
+                </b:row>
 
-            <b:row>
-                <h:form>
-                    <p:dataScroller id="entryFeed" value="#{entryFeed.getJournalEntriesByUser()}"
-                                    var="entry">
-                        <b:panel title="#{entry.title} - #{entry.dateToString()}" look="primary">
-                            <h:outputText value="#{entry.body}"/>
-                            <f:facet name="footer">
-                                <b:commandButton value="Edit"/>
-                                <b:commandButton value="Delete" look="danger"/>
-                            </f:facet>
-                        </b:panel>
-                    </p:dataScroller>
-                </h:form>
-            </b:row>
-        </b:column>
-    </b:container>
-</h:body>
+                <b:row>
+                    <h:form>
+                        <p:dataScroller id="entryFeed" value="#{entryFeed.getJournalEntriesByUser()}"
+                                        var="entry">
+                            <b:panel title="#{entry.title} - #{entry.dateToString()}" look="primary">
+                                <h:outputText value="#{entry.body}"/>
+                                <f:facet name="footer">
+                                    <b:commandButton value="Edit"/>
+                                    <b:commandButton value="Delete" look="danger"/>
+                                </f:facet>
+                            </b:panel>
+                        </p:dataScroller>
+                    </h:form>
+                </b:row>
+            </b:column>
+        </b:container>
+    </h:body>
 </html>

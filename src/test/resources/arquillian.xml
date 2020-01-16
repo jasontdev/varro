@@ -1,0 +1,28 @@
+<arquillian xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xmlns="http://jboss.org/schema/arquillian"
+            xsi:schemaLocation="http://jboss.org/schema/arquillian
+                                http://jboss.org/schema/arquillian/arquillian_1_0.xsd">
+
+    <extension qualifier="persistence">
+        <property name="defaultDataSource">openejb:Resource/testDataSource</property>
+    </extension>
+
+    <container qualifier="tomee" default="true">
+        <configuration>
+            <property name="httpPort">-1</property>
+            <property name="stopPort">-1</property>
+            <property name="ajpPort">-1</property>
+            <property name="dir">target/apache-tomee-remote</property>
+            <property name="appWorkingDir">target/arquillian-test-working-dir</property>
+            <property name="properties">
+                testDataSource = new://Resource?type=DataSource
+                testDataSource.JdbcDriver = org.hsqldb.jdbcDriver
+                testDataSource.JdbcUrl = jdbc:hsqldb:mem:arquillian
+                testDataSource.UserName = sa
+                testDataSource.Password =
+                testDataSource.JtaManaged = true
+                testDataSource.LogSql = true
+            </property>
+        </configuration>
+    </container>
+</arquillian>

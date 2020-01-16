@@ -4,11 +4,9 @@
 
 package com.jmtelfer.varro.service;
 
-import com.jmtelfer.varro.entity.JournalEntry;
 import com.jmtelfer.varro.entity.UserCredentials;
 
 import javax.ejb.Stateless;
-import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
@@ -21,9 +19,6 @@ public class UserRepository implements Serializable {
     @PersistenceContext(unitName = "VarroProductionPU")
     EntityManager users;
 
-    @Inject
-    JournalEntryRepository journalEntryRepository;
-
     public UserRepository() {
     }
 
@@ -33,13 +28,7 @@ public class UserRepository implements Serializable {
         if (!userExists(credentials.getUserName())) {
             System.out.println("Creating new user: " + username + "\n");
             users.persist(credentials);
-
-            String welcomeEntry = "Hello and welcome to Varro.";
-            JournalEntry newUserEntry = new JournalEntry(credentials.getId(),
-                    "Welcome to Varro",
-                    welcomeEntry);
-
-            journalEntryRepository.addEntry(newUserEntry);
+            
             return true;
         }
 
