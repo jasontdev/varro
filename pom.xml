@@ -50,6 +50,7 @@
             <version>8.0.0</version>
             <type>zip</type>
             <classifier>webprofile</classifier>
+            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.jboss.arquillian.junit</groupId>
