@@ -35,8 +35,8 @@ public class JournalEntryRepository implements Serializable {
 
     public List<JournalEntry> getAllEntriesByUser(Long id) {
         TypedQuery<JournalEntry> query =
-                entries.createQuery("SELECT journalEntry FROM JournalEntry journalEntry " +
-                        "WHERE journalEntry.id =:arg1 ORDER by journalEntry.entryID DESC", JournalEntry.class);
+                entries.createQuery("SELECT jEntry FROM JournalEntry jEntry " +
+                        "WHERE jEntry.id =:arg1 ORDER by jEntry.entryID DESC", JournalEntry.class);
 
         query.setParameter("arg1", id);
         return query.getResultList();

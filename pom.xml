@@ -17,7 +17,7 @@
     <dependencies>
         <dependency>
             <groupId>javax</groupId>
-            <artifactId>javaee-api</artifactId>
+            <artifactId>javaee-web-api</artifactId>
             <version>8.0</version>
             <scope>provided</scope>
         </dependency>
@@ -40,14 +40,16 @@
         </dependency>
         <dependency>
             <groupId>org.apache.tomee</groupId>
-            <artifactId>openejb-core</artifactId>
-            <version>8.0.0</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.tomee</groupId>
             <artifactId>arquillian-tomee-remote</artifactId>
             <version>8.0.0</version>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.tomee</groupId>
+            <artifactId>apache-tomee</artifactId>
+            <version>8.0.0</version>
+            <type>zip</type>
+            <classifier>webprofile</classifier>
         </dependency>
         <dependency>
             <groupId>org.jboss.arquillian.junit</groupId>
